@@ -34,7 +34,7 @@ defmodule MultipassEx.MixProject do
 
   defp deps do
     [
-      {:poison,      "~> 3.1"},
+      {:jason,       "~> 1.0"},
       {:credo,       "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
       {:dialyxir,    "~> 0.5",       only: [:dev],        runtime: false},
       {:excoveralls, "~> 0.8",       only: :test},

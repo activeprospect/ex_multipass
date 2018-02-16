@@ -135,4 +135,11 @@ defmodule MultipassExTest do
       assert map == map |> encode.() |> decode.()
     end
   end
+
+  property "padding and unpadding roundtrip equivalence" do
+    check all data       <- string(:alphanumeric),
+              block_size <- positive_integer() do
+      assert data == data |> MultipassEx.pad(block_size) |> MultipassEx.unpad()
+    end
+  end
 end
