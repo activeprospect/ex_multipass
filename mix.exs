@@ -38,6 +38,7 @@ defmodule MultipassEx.MixProject do
       {:credo,       "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
       {:dialyxir,    "~> 0.5",       only: [:dev],        runtime: false},
       {:excoveralls, "~> 0.8",       only: :test},
+      {:stream_data, "~> 0.1",       only: :test},
     ]
   end
 end
