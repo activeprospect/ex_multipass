@@ -6,28 +6,24 @@ defmodule MultipassEx do
   @encryption_bits 128
   @iv String.duplicate(<<0>>, 16)
 
-  @spec gen_encode!(String.t(), String.t()) :: (String.t() -> String.t())
-  def gen_encode!(site_key, api_key) do
-    fn data ->
-      formatted_data =
-        data
-        |> Jason.encode!()
-        |> pad(@aes128_block_size)
+  @spec encode!(String.t(), String.t(), String.t()) :: String.t()
+  def encode!(data, site_key, api_key) do
+    formatted_data =
+      data
+      |> Jason.encode!()
+      |> pad(@aes128_block_size)
 
-      :crypto.block_encrypt(:aes_cbc128, generate_key(site_key, api_key), @iv, formatted_data)
-      |> Base.url_encode64()
-    end
+    :crypto.block_encrypt(:aes_cbc128, generate_key(site_key, api_key), @iv, formatted_data)
+    |> Base.url_encode64()
   end
 
-  @spec gen_decode!(String.t(), String.t()) :: (String.t() -> map())
-  def gen_decode!(site_key, api_key) do
-    fn data ->
-      formatted_data = Base.url_decode64!(data)
+  @spec decode!(String.t(), String.t(), String.t()) :: map()
+  def decode!(data, site_key, api_key) do
+    formatted_data = Base.url_decode64!(data)
 
-      :crypto.block_decrypt(:aes_cbc128, generate_key(site_key, api_key), @iv, formatted_data)
-      |> unpad()
-      |> Jason.decode!()
-    end
+    :crypto.block_decrypt(:aes_cbc128, generate_key(site_key, api_key), @iv, formatted_data)
+    |> unpad()
+    |> Jason.decode!()
   end
 
   @spec generate_key(String.t(), String.t()) :: binary()
