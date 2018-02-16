@@ -3,7 +3,7 @@ defmodule MultipassExTest do
   use ExUnitProperties
   doctest MultipassEx
 
-  test "Decode!s a ruby sso generated multipass" do
+  test "Decodes a ruby sso generated multipass" do
     product_code = "trustedform"
 
     decode! =
@@ -20,7 +20,7 @@ defmodule MultipassExTest do
     assert decoded_multipass["product_code"] === product_code
   end
 
-  test "can encode! and decode! a multipass map" do
+  test "can encode and decode a multipass map" do
     multi_pass_map = %{
       "account" => %{
         "api_key" => "9lcddd101328780kf0982657ef3132cb",
