@@ -139,7 +139,8 @@ defmodule MultipassExTest do
               product_code <- string(:alphanumeric),
               secret <- string(:alphanumeric) do
       assert map ==
-               map |> MultipassEx.encode!(product_code, secret)
+               map
+               |> MultipassEx.encode!(product_code, secret)
                |> MultipassEx.decode!(product_code, secret)
     end
   end
