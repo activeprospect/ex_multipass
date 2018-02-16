@@ -6,7 +6,7 @@ defmodule MultipassEx do
   @encryption_bits   128
   @iv                <<0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0>>
 
-  @spec genEncode(String.t, String.t) :: (String.t -> map())
+  @spec genEncode(String.t, String.t) :: (String.t -> String.t)
   def genEncode(site_key, api_key) do
     fn(data) ->
       formatted_data = data
