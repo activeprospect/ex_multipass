@@ -56,7 +56,7 @@ defmodule MultipassEx.MixProject do
   defp package() do
     [
       # These are the default files included in the package
-      files: ["lib", "test", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "test", "config", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Ivy Rogatko"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/activeprospect/multipass_ex"}
