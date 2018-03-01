@@ -46,4 +46,18 @@ defmodule MultipassEx.MixProject do
       {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
+
+  defp description() do
+    "Ruby compatible multipass encryption and decryption"
+  end
+
+  defp package() do
+    [
+      # These are the default files included in the package
+      files: ["lib", "test", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      maintainers: ["Ivy Rogatko"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/activeprospect/multipass_ex"}
+    ]
+  end
 end
