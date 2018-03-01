@@ -4,7 +4,7 @@ defmodule MultipassEx do
   """
   @aes128_block_size 16
   @encryption_bits 128
-  @iv String.duplicate(<<0>>, 16)
+  @iv String.duplicate(<<0>>, 16) # this is from the ruby default OpenSSL IV and is insecure
 
   @spec encode!(String.t(), String.t(), String.t()) :: String.t()
   def encode!(data, site_key, api_key) do
