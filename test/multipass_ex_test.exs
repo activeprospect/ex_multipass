@@ -34,9 +34,20 @@ defmodule MultipassExTest do
               secret <- string(:alphanumeric) do
       assert map ==
                map
-               |> MultipassEx.encode!(site_key, secret)
-               |> MultipassEx.decode!(site_key, secret)
+               |> MultipassEx.encode(site_key, secret)
+               |> elem(1)
+               |> MultipassEx.decode(site_key, secret)
+               |> elem(1)
     end
+  end
+
+  test "decode returns an error on non-alphanumeric input" do
+    assert MultipassEx.decode("$@$$", "123", "123") ===
+             {:error, "non-alphabet digit found: \"$\" (byte 36)"}
+  end
+
+  test "decode returns an error on invalid data" do
+    assert MultipassEx.decode("abc", "123", "123") === {:error, "incorrect padding"}
   end
 
   property "padding and unpadding roundtrip equivalence" do

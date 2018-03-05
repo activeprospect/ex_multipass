@@ -23,6 +23,7 @@ before_script:
 
 script:
  - mix test
+ - mix coveralls.travis
  - MIX_ENV=test mix dialyzer --halt-exit-status
 
 notifications:

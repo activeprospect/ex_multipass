@@ -4,7 +4,7 @@ defmodule MultipassEx.MixProject do
   def project do
     [
       app: :multipass_ex,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       description: description(),
@@ -26,7 +26,7 @@ defmodule MultipassEx.MixProject do
         ]
       ],
 
-      #Docs
+      # Docs
       name: "multipass_ex",
       source_url: "https://github.com/activeprospect/multipass_ex"
     ]

@@ -1,4 +1,5 @@
 # MultipassEx
+[![Build Status](https://travis-ci.com/activeprospect/multipass_ex.svg?branch=master)](https://travis-ci.com/activeprospect/multipass_ex)
 
 **Ruby compatible multipass encryption and decryption**
 
@@ -14,8 +15,8 @@ def deps do
 end
 ```
 
-- Call `MultipassEx.encode!(map_to_encode, site_key, secret)` to encode a multipass and
-- `MultipassEx.decode!(encoded_multipass, site_key, secret)` to decrypt a multipass
+- Call `MultipassEx.encode(map_to_encode, site_key, secret)` to encode a multipass and
+- `MultipassEx.decode(encoded_multipass, site_key, secret)` to decrypt a multipass
 
 The docs can be found at [https://hexdocs.pm/multipass_ex](https://hexdocs.pm/multipass_ex).
 
