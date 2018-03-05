@@ -11,7 +11,7 @@ The package can be installed by adding `multipass_ex` to your list of dependenci
 ```elixir
 def deps do
   [
-    {:multipass_ex, "~> 0.1.0"}
+    {:multipass_ex, "~> 0.1"}
   ]
 end
 ```
