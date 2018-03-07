@@ -33,7 +33,7 @@ defmodule MultipassEx do
   @doc """
   Decodes a given multipass into a map with a given site_key and api_key
   """
-  @spec decode(String.t(), String.t(), String.t()) :: {:ok, map()} | {:error, String.t()}
+  @spec decode(String.t(), String.t(), String.t()) :: {:ok, map()} | {:error, String.t()} | {:error, any()}
   def decode(data, site_key, api_key)
       when is_binary(data) and is_binary(site_key) and is_binary(api_key) do
     try do
@@ -48,6 +48,7 @@ defmodule MultipassEx do
       {:ok, decoded_data}
     rescue
       e in ArgumentError -> {:error, e.message}
+      err -> {:error, err}
     end
   end
 
