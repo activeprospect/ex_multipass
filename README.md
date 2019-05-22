@@ -4,6 +4,8 @@
 
 **Ruby compatible multipass encryption and decryption**
 
+![Multipass](https://media.giphy.com/media/lKPFZ1nPKW8c8/giphy-downsized.gif)
+
 ## Installation
 
 The package can be installed by adding `multipass_ex` to your list of dependencies in `mix.exs`:
