@@ -1,97 +1,56 @@
 defmodule MultipassExTest do
   use ExUnit.Case
   use ExUnitProperties
+
+  import MultipassEx.TestData
+
+  alias MultipassEx.{CryptoError, DecodingError, JSONDecodingError}
+
   doctest MultipassEx
 
   property "encoding and decoding" do
-    check all map <-
-                fixed_map(%{
-                  "idk" =>
-                    fixed_map(%{
-                      "needed" => string(:alphanumeric),
-                      "strings" => string(:alphanumeric),
-                      "for" => string(:alphanumeric),
-                      "this" => string(:alphanumeric),
-                      "to" => string(:alphanumeric),
-                      "test" => boolean(),
-                      "somewhat" => string(:alphanumeric)
-                    }),
-                  "complex" => list_of(fixed_map(%{})),
-                  "structure" => string(:alphanumeric),
-                  "with" =>
-                    list_of(
-                      fixed_map(%{
-                        "a" => string(:alphanumeric),
-                        "round" => string(:alphanumeric),
-                        "trip" => string(:alphanumeric),
-                        "of" => boolean()
-                      })
-                    ),
-                  "this" => string(:alphanumeric),
-                  "." => boolean()
-                }),
-              site_key <- string(:alphanumeric),
-              secret <- string(:alphanumeric) do
-      assert map ==
-               map
-               |> MultipassEx.encode(site_key, secret)
-               |> elem(1)
-               |> MultipassEx.decode(site_key, secret)
-               |> elem(1)
+    check all data <- unshrinkable(example_structure()),
+              site_key <- site_key(),
+              api_key <- api_key(),
+              max_runs: 20 do
+      {:ok, encrypted_data} = MultipassEx.encode(data, site_key, api_key)
+
+      {:ok, decrypted_data} = MultipassEx.decode(encrypted_data, site_key, api_key)
+
+      assert decrypted_data == data
     end
   end
 
   property "encoding and decoding with an invalid secret" do
-    check all map <-
-                fixed_map(%{
-                  "idk" =>
-                    fixed_map(%{
-                      "needed" => string(:alphanumeric),
-                      "strings" => string(:alphanumeric),
-                      "for" => string(:alphanumeric),
-                      "this" => string(:alphanumeric),
-                      "to" => string(:alphanumeric),
-                      "test" => boolean(),
-                      "somewhat" => string(:alphanumeric)
-                    }),
-                  "complex" => list_of(fixed_map(%{})),
-                  "structure" => string(:alphanumeric),
-                  "with" =>
-                    list_of(
-                      fixed_map(%{
-                        "a" => string(:alphanumeric),
-                        "round" => string(:alphanumeric),
-                        "trip" => string(:alphanumeric),
-                        "of" => boolean()
-                      })
-                    ),
-                  "this" => string(:alphanumeric),
-                  "." => boolean()
-                }),
-              site_key <- string(:alphanumeric),
-              secret <- string(:alphanumeric) do
-      assert :error ==
-               map
-               |> MultipassEx.encode(site_key, secret)
-               |> elem(1)
-               |> MultipassEx.decode(site_key, "blahhh")
-               |> elem(0)
+    check all map <- example_structure(),
+              site_key <- site_key(),
+              api_key <- api_key(),
+              api_key_2 <- api_key(),
+              max_runs: 20 do
+      {:ok, encrypted_data} = MultipassEx.encode(map, site_key, api_key)
+
+      {:error, e} = MultipassEx.decode(encrypted_data, site_key, api_key_2)
+
+      case e do
+        %JSONDecodingError{} -> assert true
+        %CryptoError{} -> assert true
+        _ -> assert false
+      end
     end
   end
 
-  test "decode returns an error on non-alphanumeric input" do
+  test "decode returns an base64 error on non-alphanumeric input" do
     assert MultipassEx.decode("$@$$", "123", "123") ===
-             {:error, "non-alphabet digit found: \"$\" (byte 36)"}
+             {:error,
+              %DecodingError{
+                reason: :base64_decoding_error,
+                message: "base64 decoding failed",
+                data: "$@$$"
+              }}
   end
 
   test "decode returns an error on invalid data" do
-    assert MultipassEx.decode("abc", "123", "123") === {:error, "incorrect padding"}
-  end
-
-  property "padding and unpadding roundtrip equivalence" do
-    check all data <- string(:alphanumeric),
-              block_size <- positive_integer() do
-      assert data == data |> MultipassEx.pad(block_size) |> MultipassEx.unpad()
-    end
+    assert MultipassEx.decode("abc", "123", "123") ===
+             {:error, %CryptoError{reason: :argument_error, message: "decryption failed"}}
   end
 end
