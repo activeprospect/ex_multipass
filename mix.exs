@@ -30,7 +30,7 @@ defmodule ExMultipass.MixProject do
 
       # Docs
       name: "ex_multipass",
-      source_url: "https://github.com/activeprospect/multipass_ex"
+      source_url: "https://github.com/activeprospect/ex_multipass"
     ]
   end
 
