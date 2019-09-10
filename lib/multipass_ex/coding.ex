@@ -1,9 +1,9 @@
-defmodule MultipassEx.Coding do
+defmodule ExMultipass.Coding do
   @moduledoc false
 
   # Encoding / Decoding of Multipass data.
   #
-  # The MultipassEx gem truncates padding characters from base64 encoding whether
+  # The ExMultipass gem truncates padding characters from base64 encoding whether
   # they are present or not. It then adds a single padding character to the end
   # of the base64 encoded string before decoding without reguard to its necessity.
   # This causes issues if you decode without `padding: false` as it causes padding
@@ -12,7 +12,7 @@ defmodule MultipassEx.Coding do
   # The gem also replaces characters after base64 encoding to make the string
   # "url safe". This happens before base64 decoding and after base64 encoding.
 
-  alias MultipassEx.DecodingError
+  alias ExMultipass.DecodingError
 
   @doc """
   Base64 encode the string without padding and replace characters to match the

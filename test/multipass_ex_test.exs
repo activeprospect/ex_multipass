@@ -1,21 +1,21 @@
-defmodule MultipassExTest do
+defmodule ExMultipassTest do
   use ExUnit.Case
   use ExUnitProperties
 
-  import MultipassEx.TestData
+  import ExMultipass.TestData
 
-  alias MultipassEx.{CryptoError, DecodingError, JSONDecodingError}
+  alias ExMultipass.{CryptoError, DecodingError, JSONDecodingError}
 
-  doctest MultipassEx
+  doctest ExMultipass
 
   property "encoding and decoding" do
     check all data <- unshrinkable(example_structure()),
               site_key <- site_key(),
               api_key <- api_key(),
               max_runs: 20 do
-      {:ok, encrypted_data} = MultipassEx.encode(data, site_key, api_key)
+      {:ok, encrypted_data} = ExMultipass.encode(data, site_key, api_key)
 
-      {:ok, decrypted_data} = MultipassEx.decode(encrypted_data, site_key, api_key)
+      {:ok, decrypted_data} = ExMultipass.decode(encrypted_data, site_key, api_key)
 
       assert decrypted_data == data
     end
@@ -27,9 +27,9 @@ defmodule MultipassExTest do
               api_key <- api_key(),
               api_key_2 <- api_key(),
               max_runs: 20 do
-      {:ok, encrypted_data} = MultipassEx.encode(map, site_key, api_key)
+      {:ok, encrypted_data} = ExMultipass.encode(map, site_key, api_key)
 
-      {:error, e} = MultipassEx.decode(encrypted_data, site_key, api_key_2)
+      {:error, e} = ExMultipass.decode(encrypted_data, site_key, api_key_2)
 
       case e do
         %JSONDecodingError{} -> assert true
@@ -40,7 +40,7 @@ defmodule MultipassExTest do
   end
 
   test "decode returns an base64 error on non-alphanumeric input" do
-    assert MultipassEx.decode("$@$$", "123", "123") ===
+    assert ExMultipass.decode("$@$$", "123", "123") ===
              {:error,
               %DecodingError{
                 reason: :base64_decoding_error,
@@ -50,7 +50,7 @@ defmodule MultipassExTest do
   end
 
   test "decode returns an error on invalid data" do
-    assert MultipassEx.decode("abc", "123", "123") ===
+    assert ExMultipass.decode("abc", "123", "123") ===
              {:error, %CryptoError{reason: :argument_error, message: "decryption failed"}}
   end
 end

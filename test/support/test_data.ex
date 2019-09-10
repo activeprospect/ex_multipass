@@ -1,4 +1,4 @@
-defmodule MultipassEx.TestData do
+defmodule ExMultipass.TestData do
   @moduledoc false
   use ExUnitProperties
 

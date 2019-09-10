@@ -1,11 +1,11 @@
-defmodule MultipassEx.CodingTest do
+defmodule ExMultipass.CodingTest do
   @moduledoc false
   use ExUnit.Case
   use ExUnitProperties
 
-  import MultipassEx.TestData
+  import ExMultipass.TestData
 
-  alias MultipassEx.Coding
+  alias ExMultipass.Coding
 
   property "encode/1 returns mutated string with values replaced" do
     check all string <- pseudo_encrypted_string() do

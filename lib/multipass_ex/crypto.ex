@@ -1,4 +1,4 @@
-defmodule MultipassEx.Crypto do
+defmodule ExMultipass.Crypto do
   @moduledoc false
 
   # Module for encrypting and decrypting data in compliance with the Ruby MultiPass
@@ -11,7 +11,7 @@ defmodule MultipassEx.Crypto do
 
   require Logger
 
-  alias MultipassEx.{Coding, CryptoError, DecodingError, EncodingError, JSONDecodingError}
+  alias ExMultipass.{Coding, CryptoError, DecodingError, EncodingError, JSONDecodingError}
 
   @algorithm :aes_cbc128
   @block_size 16

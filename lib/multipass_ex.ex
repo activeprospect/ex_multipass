@@ -1,4 +1,4 @@
-defmodule MultipassEx do
+defmodule ExMultipass do
   @moduledoc """
   Support for consuming and generating Multipass payloads based on the Rails
   gem `Multipass`.
@@ -8,14 +8,14 @@ defmodule MultipassEx do
 
   ## Example
 
-      iex> MultipassEx.encode(%{example: "data"}, "my_site_key", "my_super_secret_key_shh")
+      iex> ExMultipass.encode(%{example: "data"}, "my_site_key", "my_super_secret_key_shh")
       {:ok, "HFtLULqnAfVZexe46_T5KHJcgSRwAtf45zPwJ5g361w"}
 
-      iex> MultipassEx.decode("HFtLULqnAfVZexe46_T5KHJcgSRwAtf45zPwJ5g361w", "my_site_key", "my_super_secret_key_shh")
+      iex> ExMultipass.decode("HFtLULqnAfVZexe46_T5KHJcgSRwAtf45zPwJ5g361w", "my_site_key", "my_super_secret_key_shh")
       {:ok, %{"example" => "data"}}
   """
 
-  alias MultipassEx.{Crypto, CryptoError, DecodingError, EncodingError, JSONDecodingError}
+  alias ExMultipass.{Crypto, CryptoError, DecodingError, EncodingError, JSONDecodingError}
 
   @doc """
   Encodes a map resulting in a Multipass compliant string.

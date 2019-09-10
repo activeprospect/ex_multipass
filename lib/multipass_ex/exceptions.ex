@@ -1,4 +1,4 @@
-defmodule MultipassEx.DecodingError do
+defmodule ExMultipass.DecodingError do
   @moduledoc """
   Error handler for base64 decoding errors.
   """
@@ -11,7 +11,7 @@ defmodule MultipassEx.DecodingError do
         }
 end
 
-defmodule MultipassEx.EncodingError do
+defmodule ExMultipass.EncodingError do
   @moduledoc """
   Error handler for encoding errors such as base64.
   """
@@ -23,7 +23,7 @@ defmodule MultipassEx.EncodingError do
         }
 end
 
-defmodule MultipassEx.CryptoError do
+defmodule ExMultipass.CryptoError do
   @moduledoc """
   Error handler for encryption/decryption related errors.
   """
@@ -35,7 +35,7 @@ defmodule MultipassEx.CryptoError do
         }
 end
 
-defmodule MultipassEx.JSONDecodingError do
+defmodule ExMultipass.JSONDecodingError do
   @moduledoc """
   Error handler for JSON decoding errors.
   """

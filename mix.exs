@@ -1,9 +1,9 @@
-defmodule MultipassEx.MixProject do
+defmodule ExMultipass.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :multipass_ex,
+      app: :ex_multipass,
       version: "0.2.0",
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env()),
