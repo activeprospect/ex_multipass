@@ -1,4 +1,4 @@
-defmodule MultipassEx.TestFixtures do
+defmodule ExMultipass.TestFixtures do
   @moduledoc false
 
   def rails_encrypted_string do
