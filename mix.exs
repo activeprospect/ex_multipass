@@ -65,7 +65,7 @@ defmodule ExMultipass.MixProject do
       files: ["lib", "test", "config", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Frank Kumro"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/activeprospect/multipass_ex"}
+      links: %{"GitHub" => "https://github.com/activeprospect/ex_multipass"}
     ]
   end
 end
