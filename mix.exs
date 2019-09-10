@@ -29,7 +29,7 @@ defmodule ExMultipass.MixProject do
       ],
 
       # Docs
-      name: "multipass_ex",
+      name: "ex_multipass",
       source_url: "https://github.com/activeprospect/multipass_ex"
     ]
   end
@@ -47,11 +47,11 @@ defmodule ExMultipass.MixProject do
   defp deps do
     [
       {:jason, "~> 1.0"},
-      {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.8", only: :test},
       {:stream_data, "~> 0.1", only: :test},
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 
