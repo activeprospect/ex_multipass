@@ -8,12 +8,12 @@
 
 ## Installation
 
-The package can be installed by adding `multipass_ex` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `ex_multipass` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:multipass_ex, "~> 0.2"}
+    {:ex_multipass, "~> 0.2"}
   ]
 end
 ```
