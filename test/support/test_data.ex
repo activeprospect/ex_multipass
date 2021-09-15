@@ -45,8 +45,10 @@ defmodule ExMultipass.TestData do
   end
 
   def random_equals do
-    gen all count <- integer(1..10),
-            equals_string <- string('=', min_length: count) do
+    gen all(
+          count <- integer(1..10),
+          equals_string <- string('=', min_length: count)
+        ) do
       equals_string
     end
   end
