@@ -7,7 +7,7 @@ jobs:
 
     strategy:
       matrix:
-        otp: ['23.3']
+        otp: ['23.3', '24.0']
         elixir: ['1.12.2']
 
     steps:
