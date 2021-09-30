@@ -9,10 +9,12 @@ defmodule ExMultipassTest do
   doctest ExMultipass
 
   property "encoding and decoding" do
-    check all data <- unshrinkable(example_structure()),
-              site_key <- site_key(),
-              api_key <- api_key(),
-              max_runs: 20 do
+    check all(
+            data <- unshrinkable(example_structure()),
+            site_key <- site_key(),
+            api_key <- api_key(),
+            max_runs: 20
+          ) do
       {:ok, encrypted_data} = ExMultipass.encode(data, site_key, api_key)
 
       {:ok, decrypted_data} = ExMultipass.decode(encrypted_data, site_key, api_key)
@@ -22,11 +24,13 @@ defmodule ExMultipassTest do
   end
 
   property "encoding and decoding with an invalid secret" do
-    check all map <- example_structure(),
-              site_key <- site_key(),
-              api_key <- api_key(),
-              api_key_2 <- api_key(),
-              max_runs: 20 do
+    check all(
+            map <- example_structure(),
+            site_key <- site_key(),
+            api_key <- api_key(),
+            api_key_2 <- api_key(),
+            max_runs: 20
+          ) do
       {:ok, encrypted_data} = ExMultipass.encode(map, site_key, api_key)
 
       {:error, e} = ExMultipass.decode(encrypted_data, site_key, api_key_2)

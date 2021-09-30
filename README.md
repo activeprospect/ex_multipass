@@ -13,7 +13,7 @@ The package can be installed by adding `ex_multipass` to your list of dependenci
 ```elixir
 def deps do
   [
-    {:ex_multipass, "~> 0.2"}
+    {:ex_multipass, "~> 0.3"}
   ]
 end
 ```

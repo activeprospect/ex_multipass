@@ -13,7 +13,7 @@ defmodule ExMultipass.Crypto do
 
   alias ExMultipass.{Coding, CryptoError, DecodingError, EncodingError, JSONDecodingError}
 
-  @algorithm :aes_cbc128
+  @algorithm :aes_128_cbc
   @block_size 16
   @key_byte_length 16
   @iv String.duplicate(<<0>>, 16)
@@ -28,7 +28,7 @@ defmodule ExMultipass.Crypto do
       {:ok, prepared_data} ->
         encrypted_data =
           @algorithm
-          |> :crypto.block_encrypt(key, @iv, prepared_data)
+          |> :crypto.crypto_one_time(key, @iv, prepared_data, true)
           |> Coding.encode()
 
         {:ok, encrypted_data}
@@ -56,7 +56,7 @@ defmodule ExMultipass.Crypto do
     key = generate_key(site_key, api_key)
 
     @algorithm
-    |> :crypto.block_decrypt(key, @iv, data)
+    |> :crypto.crypto_one_time(key, @iv, data, false)
     |> process_decrypted_data()
     |> case do
       {:ok, data} -> {:ok, data}

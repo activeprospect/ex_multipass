@@ -4,8 +4,8 @@ defmodule ExMultipass.MixProject do
   def project do
     [
       app: :ex_multipass,
-      version: "0.2.0",
-      elixir: "~> 1.6",
+      version: "0.3.0",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       description: description(),
@@ -48,8 +48,8 @@ defmodule ExMultipass.MixProject do
     [
       {:jason, "~> 1.0"},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.3", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.8", only: :test},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.14", only: :test},
       {:stream_data, "~> 0.1", only: :test},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
