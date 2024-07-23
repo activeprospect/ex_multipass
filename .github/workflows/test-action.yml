@@ -7,8 +7,8 @@ jobs:
 
     strategy:
       matrix:
-        otp: ['23.3', '24.0']
-        elixir: ['1.12.2']
+        otp: ['25.3', '26.2']
+        elixir: ['1.13.4', '1.15.8', '1.16.1']
 
     steps:
       - uses: actions/checkout@v2
@@ -39,6 +39,9 @@ jobs:
         with:
           path: priv/plts
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
+      - name: Run Formatter
+        run: mix format --check-formatted
 
       - name: Run credo
         run: MIX_ENV=test mix credo --strict

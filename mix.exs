@@ -5,7 +5,7 @@ defmodule ExMultipass.MixProject do
     [
       app: :ex_multipass,
       version: "0.3.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       description: description(),
@@ -46,12 +46,12 @@ defmodule ExMultipass.MixProject do
 
   defp deps do
     [
-      {:jason, "~> 1.0"},
-      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.14", only: :test},
-      {:stream_data, "~> 0.1", only: :test},
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
+      {:jason, "~> 1.4"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.18", only: :test},
+      {:stream_data, "~> 1.1.1", only: :test},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false}
     ]
   end
 
@@ -63,7 +63,7 @@ defmodule ExMultipass.MixProject do
     [
       # These are the default files included in the package
       files: ["lib", "test", "config", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["Frank Kumro"],
+      maintainers: ["ActiveProspect"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/activeprospect/ex_multipass"}
     ]
